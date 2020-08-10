@@ -1,6 +1,7 @@
 from collections import deque
 
-# NB: deque is a list-like container with fast appends and pops on either end
+# NB: deque is a list-like container that supports fast appends and pops on either end
+
 
 # Definition for queue
 class Queue:
@@ -12,7 +13,7 @@ class Queue:
 
     def dequeue(self):
         if not self.is_empty():
-            return self.queue.pop()
+            return self.queue.popleft()
 
     def peek(self):
         if not self.is_empty():
