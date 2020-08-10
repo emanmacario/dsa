@@ -12,8 +12,6 @@ from collections import Counter
 def palindrome_permutation(string):
     """
     Solution is O(N) time complexity, O(N) space complexity
-    :param string:
-    :return:
     """
     # Remove whitespace chars, O(N)
     stripped_string = string.lower().replace(' ', '')

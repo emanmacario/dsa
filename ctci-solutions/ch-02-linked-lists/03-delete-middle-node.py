@@ -2,8 +2,8 @@
 # the first and last node, not necessarily the exact middle) of a singly linked list, given only access to
 # that node.
 # EXAMPLE
-# lnput:the node c from the linked lista->b->c->d->e->f
-# Result: nothing is returned, but the new linked list looks like a->b->d->e- >f
+# Input: the node c from the linked list a->b->c->d->e->f
+# Result: nothing is returned, but the new linked list looks like a->b->d->e->f
 # Hints: #72
 
 
@@ -34,8 +34,12 @@ class ListNode:
 
 def delete_middle_node(node):
     prev, curr = node, node.next
-    while curr:
-        pass
+    while curr.next:
+        prev.val = curr.val
+        prev, curr = prev.next, curr.next
+
+    prev.val = curr.val  # Don't forget to set the last node value!
+    prev.next = None
 
 
 if __name__ == "__main__":
@@ -44,10 +48,13 @@ if __name__ == "__main__":
     head = ListNode.from_list(vals)
     print(head)
 
-    # Get 'middle' value
+    # Get 'middle' node
     tmp = head
-    while tmp.val != 'c':
+    while tmp.val != 'b':
         tmp = tmp.next
-
     print(tmp)
+
+    # Delete 'middle' node and print result
+    delete_middle_node(tmp)
+    print(head)
 

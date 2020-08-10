@@ -41,7 +41,7 @@ def rotate(matrix):
 
 def rotate2(matrix):
     """
-    A one-liner solution that is O(N^2) (but not in-place)
+    My own one-liner solution that is O(N^2) (but not in-place)
         - Since zipping is O(N^2) b/c we touch all elements
         - Reversing is O(N^2) since we reverse N lists and each reverse is O(N)
         - i.e. Reversing a list is O(N) in Python

@@ -1,5 +1,5 @@
 # Sum Lists: You have two numbers represented by a linked list, where each node contains a single
-# digit. The digits are stored in reverse order, such that the 1 's digit is at the head of the list. Write a
+# digit. The digits are stored in reverse order, such that the 1's digit is at the head of the list. Write a
 # function that adds the two numbers and returns the sum as a linked list.
 # EXAMPLE
 # Input: (7-> 1 -> 6) + (5 -> 9 -> 2).That is, 617 + 295.
@@ -38,11 +38,32 @@ class ListNode:
 
 
 def sum_lists(l1, l2):
-    pass
+    total = sum_list(l1) + sum_list(l2)
+    dummy_head = tail = ListNode()
+    vals = str(total)[::-1]
+    for val in map(int, vals):
+        node = ListNode(val)
+        tail.next = node
+        tail = tail.next
+
+    return dummy_head.next
+
+
+def sum_list(l):
+    """
+    Computes sum for a single linked list
+    E.g. (6 -> 1 -> 7) gives 716
+    """
+    total = 0  # Cumulative sum
+    n = 0      # Current power
+    while l:
+        total += l.val * pow(10, n)
+        l = l.next
+        n += 1
+    return total
 
 
 if __name__ == "__main__":
     l1 = ListNode.from_list([7, 1, 6])
     l2 = ListNode.from_list([5, 9, 2])
-    print(l1)
-    print(l2)
+    print(sum_lists(l1, l2))

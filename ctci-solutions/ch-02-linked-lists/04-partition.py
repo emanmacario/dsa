@@ -33,12 +33,32 @@ class ListNode:
         return nodes[0]
 
 
+# TODO: Check correctness wrt. answer in book
 def partition(head, x):
-    pass
+    """
+    Solution is O(N) time complexity in length of original list
+    and O(1) additional space
+    """
+    lesser = less_tail = ListNode()
+    greater_equal = great_tail = ListNode()
+
+    while head:
+        if head.val < x:
+            less_tail.next = head
+            less_tail = less_tail.next
+        else:
+            great_tail.next = head
+            great_tail = great_tail.next
+        head = head.next
+
+    less_tail.next = greater_equal.next
+    great_tail.next = None
+
+    return lesser.next
 
 
 if __name__ == "__main__":
     head = ListNode.from_list([3, 5, 8, 5, 10, 2, 1])
-    x = 5
     print(head)
-    partition(head, x)
+    new_head = partition(head, 3)
+    print(new_head)
