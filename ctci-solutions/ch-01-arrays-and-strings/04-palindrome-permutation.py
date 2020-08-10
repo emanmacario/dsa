@@ -15,25 +15,37 @@ def palindrome_permutation(string):
     :param string:
     :return:
     """
-    # Remove whitespace chars
+    # Remove whitespace chars, O(N)
     stripped_string = string.lower().replace(' ', '')
 
-    # Obtain character counts
+    # Obtain character counts, O(N)
     counts = Counter(stripped_string)
-    evens = odds = 0
+
+    # Calculate number of odd occurring characters, O(N)
+    odds = 0
     for char, count in counts.items():
-        if count % 2 == 0:
-            evens += 1
-        else:
+        if count % 2 == 1:
             odds += 1
 
-    # If there is an odd number (greater than one) of characters that
-    # have odd frequencies, then cannot be a permutation of a palindrome
-    if odds > 1 and odds % 2 == 1:
+    # If there is an more than one character that has an odd frequency,
+    # then cannot be a permutation of a palindrome, O(1)
+    if odds > 1:
         return False
     return True
 
 
 if __name__ == "__main__":
+    """
+    -- EXAMPLES
+    Example 1:
+        Input: "code"
+        Output: False
+    Example 2:
+        Input: "aab"
+        Output: True
+    Example 3:
+        Input: "carerac"
+        Output: True
+    """
     string = sys.argv[-1]
     print(palindrome_permutation(string))

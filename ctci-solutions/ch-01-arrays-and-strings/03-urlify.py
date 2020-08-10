@@ -13,5 +13,7 @@ def urlify(string):
 
 
 if __name__ == "__main__":
+    # E.g. string "Mr John Smith" has 'true' length of 13
     string = sys.argv[-1]
+    print(len(string))
     print(urlify(string))

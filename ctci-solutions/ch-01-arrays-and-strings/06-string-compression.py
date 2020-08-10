@@ -7,7 +7,23 @@ import sys
 
 
 def string_compression(string):
-    length = len(string)
+    # Assume string is non-empty
+    assert(string)
+
+    orig_len, curr_len = len(string), 1
+    output_string = ''
+    for i in range(1, orig_len):
+        prev, curr = string[i - 1], string[i]
+        if curr != prev:
+            output_string += f'{prev}{curr_len}'
+            curr_len = 1
+        else:
+            curr_len += 1
+
+    output_string += f'{curr}{curr_len}'
+    output_len = len(output_string)
+
+    return output_string if output_len < orig_len else string
 
 
 if __name__ == "__main__":
