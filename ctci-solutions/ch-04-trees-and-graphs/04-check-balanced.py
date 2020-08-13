@@ -3,7 +3,6 @@
 # such that the heights of the two subtrees of any node never differ by more 
 # than one.
 # Hints: #21, #33, #49, #105, #124
-from random import randint
 
 
 # Definition for a binary search tree node
@@ -26,7 +25,6 @@ class TreeNode:
                 self.left = TreeNode(val)
             else:
                 self.left.insert(val)
-
 
     def display(self):
         lines, *_ = self._display_aux()
@@ -82,7 +80,8 @@ class TreeNode:
         return lines, n + m + u, max(p, q) + 2, n + u // 2
 
 
-# Used for debugging check_balanced function
+# -- Debugging
+
 def minimal_tree(vals):
     """
     Creates a binary search tree with minimal
@@ -97,6 +96,8 @@ def minimal_tree(vals):
     root.right = minimal_tree(vals[n // 2 + 1:])
     return root
 
+
+# -- Solution
 
 def check_balanced(root):
     """
@@ -125,6 +126,11 @@ def check_height(root):
         return float('-inf')
     
     return max(left_height, right_height) + 1
+
+
+# -- Testing
+
+from random import randint
 
 
 if __name__ == "__main__":

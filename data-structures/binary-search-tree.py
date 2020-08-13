@@ -1,6 +1,3 @@
-import random
-
-
 # Definition for a binary search tree node
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -9,6 +6,9 @@ class TreeNode:
         self.right = right
 
     def insert(self, val):
+        """
+        Note: does not insert duplicate keys
+        """
         if self.val == val:
             return
         elif self.val < val:
@@ -22,6 +22,19 @@ class TreeNode:
             else:
                 self.left.insert(val)
 
+    def search(self, val):
+        if val == self.val:
+            return self
+        elif val < self.val:
+            return self.left.search(val) if self.left else None
+        else:
+            return self.right.search(val) if self.right else None
+    
+    def __str__(self):
+        """
+        Returns string representation of node's value
+        """
+        return str(self.val)
 
     def display(self):
         lines, *_ = self._display_aux()
@@ -75,11 +88,17 @@ class TreeNode:
         zipped_lines = zip(left, right)
         lines = [first_line, second_line] + [a + u * ' ' + b for a, b in zipped_lines]
         return lines, n + m + u, max(p, q) + 2, n + u // 2
-        
 
+
+from random import randint, seed
 
 if __name__ == "__main__":
+    seed(50)
     n = TreeNode(50)
     for _ in range(50):
-        n.insert(random.randint(0, 100))
+        n.insert(randint(0, 100))
     n.display()
+    n1 = n.search(31)
+    n2 = n.search(60)
+    print(n1)
+    print(n2)

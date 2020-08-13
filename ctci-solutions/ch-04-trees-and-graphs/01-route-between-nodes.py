@@ -2,6 +2,9 @@
 # whether there is a route between two nodes.
 # Hints: #127
 
+
+# TODO: Use BFS to complete this
+
 # Definition for queue
 class Queue:
     def __init__(self):
