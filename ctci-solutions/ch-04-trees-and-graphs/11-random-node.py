@@ -13,10 +13,10 @@ from random import randint, randrange, seed
 
 class TreeNode:
     """
-    A tree data structure that supports random retriedata of nodes
+    A tree data structure that supports random retrieval of nodes
     from the tree, where each node has equal probability, 1/N, of being
     chosen. The tree node data structure is modified to store the total 
-    number of descendant nodes it has to allow for 'truly' random retriedata.
+    number of descendant nodes it has to allow for 'truly' random retrieval.
     We consider a node to be a descendant of itself.
 
     Algorithmic Complexity:

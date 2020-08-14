@@ -12,7 +12,7 @@
 
 # -- Solution
 
-from . import TreeNode
+from binary_search_tree import TreeNode
 from collections import namedtuple
 
 
@@ -66,6 +66,6 @@ if __name__ == "__main__":
     tree.display()
     
     print('---')
-    node0, node1 = tree.search(41), tree.search(44)
+    node0, node1 = tree.search(41), tree.search(56)
     print(f'Nodes: {node0} {node1}')
     print(f'LCA: {lca(tree, node0, node1)}')
