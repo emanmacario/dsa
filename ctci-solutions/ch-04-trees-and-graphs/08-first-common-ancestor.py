@@ -54,6 +54,27 @@ def lca(tree, node0, node1):
     return lca_helper(tree, node0, node1).ancestor
 
 
+# -- Another solution
+
+def lowest_common_ancestor(root, p, q):
+    """
+    An iterative solution with O(N) time complexity and O(1) space complexity
+    """
+    p_val, q_val = p.val, q.val
+
+    node = root
+
+    while node:
+        parent_val = node.val
+        if p_val > parent_val and q_val > parent_val:    
+            node = node.right
+        elif p_val < parent_val and q_val < parent_val:
+            node = node.left
+        else:
+            return node
+
+
+
 # -- Testing
 
 from random import randint, seed
