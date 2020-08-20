@@ -27,6 +27,24 @@ def binary_search(A, v, low, high):
         return binary_search(A, v, mid + 1, high)
 
 
+def binary_search(A, target):
+    """
+    Traditional iterative binary search (accounting for integer overflow)
+    """
+    L, R = 0, len(A) - 1
+    while L <= R:
+        M = L + (R - L) // 2  # Avoids integer overflow (unnecessary in Python)
+        if A[M] < target:
+            L = M + 1
+        elif A[M] == target:
+            return M
+        else:
+            R = M - 1
+    
+    return -1
+            
+
+
 if __name__ == '__main__':
     v = randint(0, 20)
     A = sorted([randint(0, 20) for _ in range(10)])
