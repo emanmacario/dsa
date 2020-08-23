@@ -8,7 +8,7 @@
 
 # -- Solution
 
-def parens_prime(N):
+def parens(N):
     """
     Generates all valid combinations of n parentheses. Builds the 
     string from scratch. Under this approach, we add left and right 
