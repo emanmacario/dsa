@@ -6,34 +6,7 @@
 # Hints: #138, #174, #187, #209, #243, #265, #295
 
 
-# -- Solutions
-
-# -- Solution One: Naive algorithm, which generates duplicates
-
-def parens(N):
-    """
-    Prints all valid combinations of n pairs of parentheses.
-    Algorithm generates duplicates, hence the type conversion
-    in the return statement
-    """
-    # Base case
-    if N == 1:
-        return ['()']
-
-    # Recursive case
-    base, result = parens(N-1), []
-    for combination in base:
-        new_combinations = [
-            combination + '()',
-            '()' + combination,
-            '(' + combination + ')'
-        ]
-        result.extend(new_combinations)
-
-    return set(result)
-    
-
-# -- Solution Two: Smarter algorithm, avoids duplicates
+# -- Solution
 
 def parens_prime(N):
     """
@@ -73,9 +46,7 @@ def parens_prime(N):
     
 # -- Testing
 
-if __name__ == '__main__':
-    # combinations = parens(5)
-    # for c in combinations:
-    #     print(c)
+from pprint import pprint
 
-    print(parens_prime(3))
+if __name__ == '__main__':
+    pprint(sorted(parens(4)))
