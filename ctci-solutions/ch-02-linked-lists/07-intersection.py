@@ -30,33 +30,56 @@ class ListNode:
         return nodes[0]
 
 
-def intersection(h1, h2):
-    seen = set()
-    while h1 or h2:
-        if h1:
-            if h1 in seen:
-                return h1
-            seen.add(h1)
-            h1 = h1.next
+def getIntersectionNode(headA, headB):
+    """
+    Returns intersection node if it exists, else None.
+    Note that intersection is defined by equivalent object
+    references, not equivalent values.
 
-        if h2:
-            if h2 in seen:
-                return h2
-            seen.add(h2)
-            h2 = h2.next
-
-    return None
+    Time complexity is O(A + B), space complexity is O(1)
+    """
+    # Get lengths of both linked lists, O(A + B)
+    dh_A, dh_B = headA, headB
+    lenA = lenB = 0
+    while dh_A:
+        lenA += 1
+        dh_A = dh_A.next
+        
+    while dh_B:
+        lenB += 1
+        dh_B = dh_B.next
+    
+    # Compute length differences between lists
+    diff = lenA - lenB
+    if diff > 0:
+        is_A_longer = True
+    else:
+        is_A_longer = False
+    
+    # Traverse the longer list by 'diff' nodes
+    dh_A, dh_B = headA, headB
+    for _ in range(abs(diff)):
+        if is_A_longer:
+            dh_A = dh_A.next
+        else:
+            dh_B = dh_B.next
+    
+    # Get the intersection node, if it exists
+    while dh_A and dh_B:
+        if dh_A is dh_B:
+            return dh_A
+        dh_A, dh_B = dh_A.next, dh_B.next
 
 
 if __name__ == "__main__":
-    h1 = ListNode.from_list([1, 2, 3, 4])
-    h2 = h1.next.next.next
-    print(h1)
-    print(h2)
+    headA = ListNode.from_list([1, 2, 3, 4])
+    headB = headA.next.next.next
+    print(headA)
+    print(headB)
 
-    intersect = intersection(h1, h2)
-    if intersect:
+    intersection = getIntersectionNode(headA, headB)
+    if intersection:
         print('-- Intersection found --')
-        print(intersect)
+        print(intersection)
     else:
         print('-- No intersection found --')
