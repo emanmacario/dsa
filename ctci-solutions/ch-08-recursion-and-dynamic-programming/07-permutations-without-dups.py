@@ -19,7 +19,8 @@ def permutations(s):
     c = s[0]
     for sequence in permutations(s[1:]):
         for i in range(len(sequence) + 1):
-            result.append(sequence[:i] + c + sequence[i:])
+            permutation = ''.join((sequence[:i], c, sequence[i:]))
+            result.append(permutation)
     
     return result
 
