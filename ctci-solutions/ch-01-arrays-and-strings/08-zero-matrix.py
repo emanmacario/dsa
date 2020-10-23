@@ -6,7 +6,7 @@
 def zero_matrix(matrix):
     """
     Solution is O(MN) time complexity since we touch each element at least once
-    It is O(M + N) space complexity since since we store the zero row and zero column indexes
+    It is O(M + N) space complexity since we store the zero row and zero column indexes
 
     Additional:
         - To make algorithm O(1) space, use first row and column of matrix as storage

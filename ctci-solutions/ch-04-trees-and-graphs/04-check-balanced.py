@@ -46,8 +46,8 @@ def check_height(root):
         # Pass error up
         return float('-inf')
     
-    height_diff = left_height - right_height
-    if abs(height_diff) > 1:
+    height_diff = abs(left_height - right_height)
+    if height_diff > 1:
         return float('-inf')
     
     return max(left_height, right_height) + 1

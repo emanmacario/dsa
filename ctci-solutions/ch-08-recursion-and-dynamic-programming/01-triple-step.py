@@ -14,6 +14,8 @@ def number_of_ways_to_top(top, maximum_step):
     We use the formula given below to understand the problem:
 
         F(n, k) = sum F(n - i, k) for i = 1,..,k
+        
+        where F(0) = 1
 
     Where
         n: total number of steps to climb

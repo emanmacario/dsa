@@ -16,10 +16,18 @@ def parens(N):
     complexity is O(2^N), while space complexity is O(N).
     """
 
-    def add_paren(result, left_rem, right_rem, string, index):
+    def add_paren(result, left_rem, right_rem, string):
         """
         Recursive helper function that adds a single parentheses
         and recurses, adding valid combinations to the result list
+
+        Args
+            result: final result list
+            left_rem: number of left parentheses remaining
+            right_rem: number of right parentheses remaining
+            string: intermediate string
+        Returns
+            None
         """
         # Invalid state
         if left_rem < 0 or right_rem < left_rem:
@@ -27,19 +35,17 @@ def parens(N):
 
         # Out of left and right parentheses
         if left_rem == 0 and right_rem == 0:
-            result.append(''.join(string))
+            result.append(string)
         else:
-            # Add left and recurse
-            string[index] = '('
-            add_paren(result, left_rem - 1, right_rem, string, index + 1)
+            # Add left paren and recurse
+            add_paren(result, left_rem - 1, right_rem, string + '(')
 
-            # Add right and recurse
-            string[index] = ')'
-            add_paren(result, left_rem, right_rem - 1, string, index + 1)
+            # Add right paren and recurse
+            add_paren(result, left_rem, right_rem - 1, string + ')')
 
     # Generate and return valid combinations
     result = []
-    add_paren(result, N, N, [''] * N * 2, 0)
+    add_paren(result, N, N, '')
     return result
 
 

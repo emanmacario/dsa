@@ -56,23 +56,19 @@ def lca(tree, node0, node1):
 
 # -- Another solution
 
-def lowest_common_ancestor(root, p, q):
+def lowest_common_ancestor(root, n1, n2):
     """
     An iterative solution with O(N) time complexity and O(1) space complexity
     """
-    p_val, q_val = p.val, q.val
-
     node = root
 
     while node:
-        parent_val = node.val
-        if p_val > parent_val and q_val > parent_val:    
+        if n1.val > node.val and n2.val > node.val:
             node = node.right
-        elif p_val < parent_val and q_val < parent_val:
+        elif n1.val < node.val and n2.val < node.val:
             node = node.left
         else:
             return node
-
 
 
 # -- Testing
@@ -90,3 +86,4 @@ if __name__ == "__main__":
     node0, node1 = tree.search(41), tree.search(56)
     print(f'Nodes: {node0} {node1}')
     print(f'LCA: {lca(tree, node0, node1)}')
+    print(f'LCA: {lowest_common_ancestor(tree, node0, node1)}')

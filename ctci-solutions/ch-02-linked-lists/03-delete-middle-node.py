@@ -33,13 +33,21 @@ class ListNode:
 
 
 def delete_middle_node(node):
-    prev, curr = node, node.next
-    while curr.next:
-        prev.val = curr.val
-        prev, curr = prev.next, curr.next
+    """
+    Solution is to simply copy the data from the next node over to the
+    current node, and then to delete the next node
+    """
+    if not node or not node.next:
+        # Failure, not cannot be null, or next node cannot be null
+        # (node cannot be last in the linked list)
+        return False
 
-    prev.val = curr.val  # Don't forget to set the last node value!
-    prev.next = None
+    next_ = node.next
+    node.val = next_.val
+    node.next = next_.next
+
+    return True
+
 
 
 if __name__ == "__main__":
@@ -57,4 +65,6 @@ if __name__ == "__main__":
     # Delete 'middle' node and print result
     delete_middle_node(tmp)
     print(head)
+
+
 

@@ -15,17 +15,15 @@ def magic_index(A):
     in addition to binary search to run in O(log N) time
     """
     def binary_search_magic_index(A, low, high):
-        if low > high:
-            return -1
-        
-        mid = (low + high) // 2
-
-        if A[mid] == mid:
-            return mid
-        elif A[mid] > mid:
-            return binary_search_magic_index(A, low, mid - 1)
-        else:
-            return binary_search_magic_index(A, mid + 1, high)
+        while low <= high:
+            mid = (low + high) // 2
+            if A[mid] == mid:
+                return mid
+            elif A[mid] > mid:
+                high = mid - 1
+            else:
+                low = mid + 1
+        return -1
 
     return binary_search_magic_index(A, 0, len(A) - 1)
 
@@ -52,6 +50,11 @@ def magic_index_duplicates(A):
         # However, we can prune the left and right subarrays to quicken
         # search, because we know that it is impossible for the magic
         # index to be at certain indexes
+
+        # The general pattern is that we compare mid Index and midValue for equality first.
+        # Then, if they are not equal, we recursively search the left and right sides as follows:
+        # - Left side: search indices start through min(midlndex - 1, midValue ).
+        # - Right side: search indices max(midlndex + 1, midValue) through end.
 
         # Search left
         left_high = min(A[mid], mid - 1)

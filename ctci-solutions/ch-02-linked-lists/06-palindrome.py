@@ -45,6 +45,9 @@ def palindrome(head):
     # Reverse the second half of the list
     reverse_slow = reverse_list(slow)
 
+    print('HEAD:', head)
+    print('REVERSE SLOW:', reverse_slow)
+
     # Compare first half with reversed second half2
     while head and reverse_slow:
         if head.val != reverse_slow.val:
@@ -65,6 +68,6 @@ def reverse_list(head):
 
 
 if __name__ == "__main__":
-    head = ListNode.from_list([1, 2, 3, 4, 3, 2, 1])
+    head = ListNode.from_list([1, 2, 2, 1]) # ListNode.from_list([1, 2, 3, 4, 3, 2, 1])
     print(head)
     print(palindrome(head))

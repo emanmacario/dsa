@@ -14,9 +14,9 @@ def power_set(s):
     if not s:
         return [[]]
     
-    # Recursive case: remove an element from the input set, then generate
-    # the powerset of the mutated set. Next, copy each subset in the powerset
-    # and append the removed element to each subset
+    # Recursive case: remove an element from the input set of size n, then generate
+    # the powerset of the reduced mutated set of size n - 1. Next, copy each subset 
+    # in the powerset and append the removed element to each copied subset
     element = s.pop()
     extension = []
     all_subsets = power_set(s)

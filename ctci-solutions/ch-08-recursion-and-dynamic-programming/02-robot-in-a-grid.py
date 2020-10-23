@@ -55,7 +55,7 @@ def uniquePathsWithObstacles(obstacleGrid):
             dp[y][x] = ((dp[y-1][x] if obstacleGrid[y-1][x] != 1 else 0) + 
                         (dp[y][x-1] if obstacleGrid[y][x-1] != 1 else 0))
 
-    return dp[m-1][n-1] if obstacleGrid[m-1][n-1] != 1 else 0
+    return dp[m-1][n-1]
 
 
 if __name__ == '__main__':

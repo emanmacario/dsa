@@ -29,12 +29,9 @@ def pws_helper(node, curr, target):
         return 0
     
     curr += node.val
-    if curr == target:
-        return (pws_helper(node.left, curr, target) + 
-                pws_helper(node.right, curr, target) + 1)
-    else:
-        return (pws_helper(node.left, curr, target) + 
-                pws_helper(node.right, curr, target) + 0)
+    return (1 if curr == target else 0 +
+            pws_helper(node.left, curr, target) +
+            pws_helper(node.right, curr, target))
 
 
 # -- Testing

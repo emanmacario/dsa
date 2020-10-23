@@ -37,17 +37,23 @@ def one_edit_replace(first, second):
 def one_edit_insert(first, second):
     """
     Checks if you can insert a character into first to make it second
-    Note that first is shorter than second by one char
+    Note that first is shorter than second by one char 
     """
     # Solution is O(N) where N is length of shorter string
     i = j = 0
     while i < len(first) and j < len(second):
+        # First, check if chars are the same at the indexes
         if first[i] == second[j]:
+            # If so, increment pointers
             i += 1
             j += 1
         else:
+            # If the pointers do not match, and the check above has failed,
+            # then we can return false
             if i != j:
                 return False
+
+            # j should only ever be incremented in isolation once
             j += 1
 
     return True

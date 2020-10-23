@@ -2,6 +2,9 @@
 # which returns the minimum element? Push, pop and min should all operate in 0(1) time.
 # Hints: #27, #59, #78
 
+from collections import namedtuple
+
+StackNode = namedtuple('StackNode', ['min', 'val'])
 
 class MinStack:
     """
@@ -24,20 +27,20 @@ class MinStack:
     def push(self, x: int) -> None:
         currMin = self.getMin()
         currMin = min(currMin, x) if currMin is not None else x
-        self.stack.append((currMin, x))
+        self.stack.append(StackNode(currMin, x))
 
     def pop(self) -> None:
         # Return nothing
-        self.stack.pop()
+        self.stack.pop().val
 
     def peek(self) -> int:
-        return self.stack[-1][1]
+        return self.stack[-1].min
 
     def getMin(self) -> int:
         if not self.stack:
             return None
 
-        return self.stack[-1][0]
+        return self.stack[-1].min
 
     def __str__(self):
         if not self.stack:
@@ -53,6 +56,9 @@ if __name__ == "__main__":
     stack = MinStack()
     stack.push(0)
     stack.push(1)
-    stack.push(0)
+    stack.push(-5)
+    stack.push(69)
+    stack.push(80)
+    stack.push(-10)
     print(stack)
     print(f'MIN: {stack.getMin()}')

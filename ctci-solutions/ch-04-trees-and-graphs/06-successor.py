@@ -52,11 +52,11 @@ def in_order_successor(node):
     if node.right:
         return leftmost_child(node.right)
     else:
-        n = node
-        p = n.parent
-        # Go up until we're on left instead of right
-        while p and p.left is not n:
-            n = p
+        c = node
+        p = c.parent
+        # Go up until we find the parent (i.e. root) node of the left subtree we are in
+        while p and p.left is not c:
+            c = p
             p = p.parent
         return p
 
@@ -79,7 +79,6 @@ def leftmost_child(node):
 from random import randint, seed
 
 if __name__ == "__main__":
-    seed(69)
     tree = ModifiedTreeNode(50)
     for _ in range(20):
         tree.insert(randint(25, 75))
@@ -88,7 +87,7 @@ if __name__ == "__main__":
     print('---\nIn-order traversal:')
     in_order_traversal(tree)
     print('---')
-    node = tree.search(35)
+    node = tree.search(randint(25, 75))
     print(f'Node: {node}')
     print(f'Successor: {in_order_successor(node)}')
     

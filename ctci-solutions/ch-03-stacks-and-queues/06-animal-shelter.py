@@ -6,6 +6,14 @@
 # and dequeueCat. You may use the built-in Linked list data structure.
 # Hints: #22, #56, #63
 
+from enum import Enum
+
+class Animal(Enum):
+    DOG = 1
+    CAT = 2
+    def __str__(self):
+        return 'Dog' if self.value == 1 else 'Cat'
+
 # Definition for singly-linked list
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -37,7 +45,7 @@ class AnimalQueue:
     """
     A queue data structure for an animal shelter that
     supports enqueueing and dequeueing of both cats
-    and dogs, denoted via characters 'C' and 'D'
+    and dogs, denoted via characters Animal.CAT and Animal.DOG
     respectively 
     """
     def __init__(self):
@@ -65,10 +73,10 @@ class AnimalQueue:
 
         return self.head.val
 
-    def dequeueDog(self):
+    def dequeueAnimal(self, animal):
         prev, curr = None, self.head
         while curr:
-            if curr.val == 'D':
+            if curr.val == animal:
                 if prev is None:
                     # Dequeued node is head
                     self.head = self.head.next
@@ -88,25 +96,12 @@ class AnimalQueue:
 
             prev, curr = curr, curr.next
 
+
+    def dequeueDog(self):
+        self.dequeueAnimal(Animal.DOG)
+
     def dequeueCat(self):
-        # NB: Same functionality as dequeueDog. Could be refactored
-        prev, curr = None, self.head
-        while curr:
-            if curr.val == 'C':
-                if prev is None:
-                    self.head = self.head.next
-                    if self.tail is curr:
-                        self.tail = self.head
-                else:
-                    if self.tail is curr:
-                        self.tail = prev
-                        prev.next = None
-                    else:
-                        prev.next = curr.next
-
-                return curr.val
-
-            prev, curr = curr, curr.next
+        self.dequeueAnimal(Animal.CAT)
 
     @classmethod
     def from_list(cls, animals):
@@ -122,8 +117,10 @@ class AnimalQueue:
 
 
 if __name__ == "__main__":
-    queue = AnimalQueue.from_list(['C', 'D', 'D', 'C', 'D', 'C'])
+    queue = AnimalQueue.from_list([Animal.CAT, Animal.DOG, Animal.DOG, Animal.CAT, Animal.DOG, Animal.CAT])
     print(queue)
-    print(queue.dequeueDog())
+    queue.dequeueDog()
+    print(queue)
+    queue.dequeueAny()
     print(queue)
 

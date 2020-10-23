@@ -38,29 +38,34 @@ class ListNode:
 
 
 def sum_lists(l1, l2):
-    total = sum_list(l1) + sum_list(l2)
+    """
+    Taken from my LeetCode solution
+    https://leetcode.com/problems/add-two-numbers/
+    """
     dummy_head = tail = ListNode()
-    vals = str(total)[::-1]
-    for val in map(int, vals):
-        node = ListNode(val)
-        tail.next = node
+    carry = 0
+    
+    while l1 or l2 or carry:
+        # Get current list values
+        v1 = l1.val if l1 else 0
+        v2 = l2.val if l2 else 0
+        
+        # Add digits and get carry
+        carry, digit = divmod(v1 + v2 + carry, 10)  # divmod(x, y) returns (x // y, x % y)
+        
+        # Insert list node into result
+        tail.next = ListNode(digit)
         tail = tail.next
-
+        
+        # Update pointers
+        l1 = l1.next if l1 else None
+        l2 = l2.next if l2 else None
+        
     return dummy_head.next
+            
 
 
-def sum_list(l):
-    """
-    Computes sum for a single linked list
-    E.g. (6 -> 1 -> 7) gives 716
-    """
-    total = 0  # Cumulative sum
-    n = 0      # Current power
-    while l:
-        total += l.val * pow(10, n)
-        l = l.next
-        n += 1
-    return total
+
 
 
 if __name__ == "__main__":

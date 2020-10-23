@@ -42,31 +42,28 @@ class Stack:
 
 def sort(stack):
     """
-    Sorts a stack in-place by using an extra stack
-    and no additional ephemeral data structures
+    Sorts a stack in-place by using an extra stack and no additional
+    ephemeral data structures (e.g. an array). The smallest elements
+    are at the top of the stack.
+
+    Idea is to transfer all the elements onto the temp stack in reverse
+    sorted order, and then reverse the temp stack onto the original stack.
+    This is done by popping and testing one element of the original stack,
+    and testing it against the temp stack. We reverse the temp stack when
+    needed to allow it to be in reverse sorted order at the end.
     """
-    # Holds elements in reverse sorted order
-    # i.e. Largest items are on top of stack
     tmp = Stack()
-    
     while not stack.is_empty():
         item = stack.pop()
-        if tmp.peek() is None:
-            # Push empty item onto empty temp stack
-            tmp.push(item)
-        else:
-            # Push all larger items in temp onto original stack
-            while not tmp.is_empty() and tmp.peek() > item:
-                stack.push(tmp.pop())
 
-            # Push popped item from original stack onto temp
-            tmp.push(item)
+        while not tmp.is_empty() and item < tmp.peek():
+            stack.push(tmp.pop())
+        
+        tmp.push(item)
 
-    # Unstack temp into original stack
     while not tmp.is_empty():
         stack.push(tmp.pop())
 
-        
 
 if __name__ == "__main__":
     stack = Stack.from_list([1, 20, 19, 3, 5, 2, 6, 18, 1])

@@ -40,7 +40,7 @@ def list_of_depths(root):
     Creates a linked list for each depth level in a binary search tree
     """
     if not root:
-        return
+        return []
 
     lists = []
     queue = [root]
@@ -48,8 +48,13 @@ def list_of_depths(root):
         depth = queue
         queue = [c for p in queue for c in [p.left, p.right] if c]
         # NB: In real interview, generate lists properly with dummy heads
-        depth_list = ListNode.from_list([n.val for n in depth])
-        lists.append(depth_list)
+
+        dummy_head = tail = ListNode()
+        for node in depth:
+            tail.next = ListNode(node.val)
+            tail = tail.next
+
+        lists.append(dummy_head.next)
 
     return lists
 
